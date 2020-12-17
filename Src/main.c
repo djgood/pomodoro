@@ -97,6 +97,40 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t data[2];
+  // Scan limit
+  data[0] = 0x0B;
+  data[1] = 0x07;
+  HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 2, HAL_MAX_DELAY);
+
+  data[0] = 0x0F;
+  data[1] = 0x04;
+  HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 2, HAL_MAX_DELAY);
+  
+
+
+    volatile uint8_t comparison = 0;
+    uint8_t output = 0;
+    while ((comparison | (1 << 4)) == 0)
+    {
+        data[0] = 0x0F;
+        HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 1, HAL_MAX_DELAY);
+        HAL_I2C_Master_Receive(&hi2c1, 0x0, &output, 1, HAL_MAX_DELAY);
+        comparison = output;
+    }
+
+    data[0] = 0x14;
+    HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 1, HAL_MAX_DELAY);
+    HAL_I2C_Master_Receive(&hi2c1, 0x0, &output, 1, HAL_MAX_DELAY);
+    data[0] = 0x15;
+    HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 1, HAL_MAX_DELAY);
+    HAL_I2C_Master_Receive(&hi2c1, 0x0, &output, 1, HAL_MAX_DELAY);
+    data[0] = 0x16;
+    HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 1, HAL_MAX_DELAY);
+    HAL_I2C_Master_Receive(&hi2c1, 0x0, &output, 1, HAL_MAX_DELAY);
+    data[0] = 0x17;
+    HAL_I2C_Master_Transmit(&hi2c1, 0x0, data, 1, HAL_MAX_DELAY);
+    HAL_I2C_Master_Receive(&hi2c1, 0x0, &output, 1, HAL_MAX_DELAY);
   while (1)
   {
     /* USER CODE END WHILE */
@@ -105,7 +139,9 @@ int main(void)
     HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
     HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
     // HAL_GPIO_TogglePin(Buzzer_GPIO_Port, Buzzer_Pin);
-    HAL_Delay(500);
+
+
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
