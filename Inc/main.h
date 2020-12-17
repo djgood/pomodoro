@@ -66,10 +66,6 @@ void Error_Handler(void);
 #define Push_Button1_EXTI_IRQn EXTI0_1_IRQn
 #define Buzzer_Pin GPIO_PIN_2
 #define Buzzer_GPIO_Port GPIOA
-#define SCL_Pin GPIO_PIN_3
-#define SCL_GPIO_Port GPIOA
-#define SDA_Pin GPIO_PIN_4
-#define SDA_GPIO_Port GPIOA
 #define DCDC_En_Pin GPIO_PIN_5
 #define DCDC_En_GPIO_Port GPIOA
 #define TS_En_Pin GPIO_PIN_6
